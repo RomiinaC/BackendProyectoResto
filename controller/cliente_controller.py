@@ -66,3 +66,15 @@ def update_cliente(id_cliente):
     db.session.commit()  
     return cliente_schema.jsonify(cliente)  # Retorna el JSON del producto actualizado
 
+def validarEmail(email):
+    
+    all_productos = Cliente.query.where(Cliente.email == email)  # Obtiene todos los registros de la tabla 
+    result = clientes_schema.dump(all_productos)  # Serializa los registros en formato JSON    
+    
+    if len(result) <= 0:
+        return  jsonify({"datos":False, "MSG":"correo electronico inexistente", "CODIGO":000})
+
+    return  jsonify({"datos":True, "MSG":"correo electronico Ok", "CODIGO":200}) # Retorna msj de confirmacion
+
+    # return  jsonify({"datos":result, "MSG":"correo ok", "CODIGO":200}) # Retorna los datos del cliente especifico al email y un mensaje
+	
