@@ -78,3 +78,12 @@ def validarEmail(email):
 
     # return  jsonify({"datos":result, "MSG":"correo ok", "CODIGO":200}) # Retorna los datos del cliente especifico al email y un mensaje
 	
+def validarLogin(email, clave):
+    
+    all_productos = Cliente.query.where(Cliente.email == email , Cliente.clave == clave)
+    result = clientes_schema.dump(all_productos)  # Serializa los registros en formato JSON    
+    
+    if len(result) <= 0:
+        return  jsonify({"datos":False, "MSG":"clave inexistente o erronea", "CODIGO":000})
+
+    return  jsonify({"datos":True, "MSG":"correo electronico Ok", "CODIGO":200}) # Retorna msj de confirmacion
