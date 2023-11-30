@@ -87,3 +87,18 @@ def validarLogin(email, clave):
         return  jsonify({"datos":False, "MSG":"clave inexistente o erronea", "CODIGO":000})
 
     return  jsonify({"datos":True, "MSG":"correo electronico Ok", "CODIGO":200}) # Retorna msj de confirmacion
+
+def create_new_user():
+
+    nombre = request.json["nombre"] 
+    apellido = request.json["apellido"]  
+    clave = request.json["clave"]  
+    email = request.json["email"] 
+    fecha_nac = request.json["fecha_nac"]
+    tel = request.json["tel"]
+    id_restaurante = "1"
+
+    new_cliente = Cliente(nombre, apellido, clave, email, fecha_nac, tel, id_restaurante) 
+    db.session.add(new_cliente)  # Agrega el nuevo cliente a la sesión de la base de datos
+    db.session.commit() 
+    return cliente_schema.jsonify(new_cliente)  # Retorna el JSON del nuevo cliente creado

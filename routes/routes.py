@@ -14,3 +14,5 @@ app.put("/clientes/<id_cliente>")(update_cliente)
 app.get("/login/<email>")(validarEmail)
 
 app.get("/login/<email>/<clave>")(validarLogin)
+
+app.post("/page/acceso-user")(create_cliente)
