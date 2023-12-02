@@ -27,6 +27,7 @@ def get_cliente_por_id(id_cliente):
 def delete_cliente_por_id(id_cliente):
 
     cliente = Cliente.query.get(id_cliente)
+    print(cliente)
     db.session.delete(cliente)  # Elimina el producto de la sesión de la base de datos
     db.session.commit()  # Guarda los cambios en la base de datos
     return cliente_schema.jsonify(cliente)  # Retorna el JSON del cliente eliminado
@@ -102,3 +103,16 @@ def create_new_user():
     db.session.add(new_cliente)  # Agrega el nuevo cliente a la sesión de la base de datos
     db.session.commit() 
     return cliente_schema.jsonify(new_cliente)  # Retorna el JSON del nuevo cliente creado
+
+def mostrar_perfil(email):
+    
+    all_productos = Cliente.query.where(Cliente.email == email)  # Obtiene todos los registros de la tabla 
+    result = clientes_schema.dump(all_productos)
+    return jsonify(result)
+
+def delete_user(email):
+
+    all_clientes = Cliente.query.filter(Cliente.email == email)
+    all_clientes.delete()
+    db.session.commit()
+    return jsonify({"MSG":"Usuario eliminado exitosamente", "CODIGO":200, "complete":True})
