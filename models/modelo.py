@@ -23,7 +23,7 @@ class Cliente(db.Model):
     clave = db.Column(db.String(100))
     email = db.Column(db.String(100))
     fecha_nac = db.Column(db.Date())
-    tel = db.Column(db.String(400))
+    tel = db.Column(db.String(100))
     id_restaurante = db.Column(db.Integer)
 
     def __init__(self, nombre, apellido, clave, email, fecha_nac, tel, id_restaurante):
