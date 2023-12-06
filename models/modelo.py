@@ -13,6 +13,8 @@ db = SQLAlchemy(app)
 ma = Marshmallow(app)
 
 
+# tabla cliente
+
 class Cliente(db.Model): 
     """
     Definición de la tabla Cliente en la base de datos.
@@ -45,6 +47,78 @@ class ClienteSchema(ma.Schema):
 cliente_schema = ClienteSchema()  # Objeto para serializar/deserializar un producto
 clientes_schema = ClienteSchema(many=True)  # Objeto para serializar/deserializar múltiples productos
 
+
+# tabla plato
+class Plato(db.Model): 
+    """
+    Definición de la tabla Plato en la base de datos.
+    """
+    id_plato = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String(100))
+    categoria = db.Column(db.String(100))
+    tipo = db.Column(db.String(10))
+    foto = db.Column(db.String(100))
+    id_menu = db.Column(db.Integer)
+    precio = db.Column(db.Integer)
+    
+    def __init__(self, nombre, categoria, tipo, foto, precio, id_menu):
+       
+        self.nombre = nombre
+        self.categoria = categoria
+        self.tipo =tipo
+        self.foto = foto
+        self.precio = precio
+        self.id_menu = id_menu
+
+class PlatoSchema(ma.Schema):   
+    class Meta:
+        fields = ("id_plato", "nombre", "categoria", "tipo", "foto","precio","id_menu")
+
+plato_schema = PlatoSchema()  # Objeto para serializar/deserializar un producto
+platos_schema = PlatoSchema(many=True)  # Objeto para serializar/deserializar múltiples productos
+
+# tabla empleado
+class Empleado(db.Model): 
+    """
+    Definición de la tabla Cliente en la base de datos.
+    """
+    id_empleado = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String(100))
+    apellido = db.Column(db.String(100))
+    puesto = db.Column(db.String(100))
+    email = db.Column(db.String(100))
+    clave = db.Column(db.String(100))
+    dni = db.Column(db.String(100))
+    fecha_ingreso = db.Column(db.Date())
+    salario = db.Column(db.Integer)
+    tel = db.Column(db.String(100))
+    direccion = db.Column(db.String(100))
+    fecha_nac = db.Column(db.Date())
+    id_restaurante = db.Column(db.Integer)
+
+    def __init__(self, nombre, apellido,puesto, email, clave, dni, fecha_ingreso, salario, tel, direccion, fecha_nac, id_restaurante):
+       
+        self.nombre = nombre
+        self.apellido = apellido
+        self.puesto = puesto
+        self.email = email
+        self.clave = clave
+        self.dni = dni
+        self.fecha_ingreso = fecha_ingreso
+        self.salario = salario
+        self.tel = tel
+        self.direccion = direccion
+        self.fecha_nac = fecha_nac
+        self.id_restaurante = id_restaurante
+
+
+class EmpleadoSchema(ma.Schema):
+    
+    class Meta:
+        fields = ("id_empleado", "nombre", "apellido","puesto","email", "clave", "dni", "fecha_ingreso","salario","tel","direccion","fecha_nac", "id_restaurante")
+
+empleado_schema = EmpleadoSchema()  # Objeto para serializar/deserializar un producto
+empleados_schema = EmpleadoSchema(many=True)  # Objeto para serializar/deserializar múltiples productos
 
 
 

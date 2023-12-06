@@ -21,7 +21,6 @@ def validarLogin():
     except Exception as e:
         return jsonify({"datos":False, "MSG":"Error en el inicio de sesion", "CODIGO":000})
 
-
 def create_new_user():
 
     nombre = request.json["nombre"] 
@@ -54,14 +53,8 @@ def update_clave():
     email = request.json["email"] 
     all_clientes = Cliente.query.filter(Cliente.email == email) 
     cliente = all_clientes[0]
-    # Actualiza los atributos con los datos proporcionados en el JSON  
-    # cliente.nombre = request.json["nombre"] 
-    # cliente.apellido = request.json["apellido"]  
     cliente.clave = request.json["clave"]  
-    # cliente.email = request.json["email"] 
-    # cliente.fecha_nac = request.json["fecha_nac"]
     # cliente.tel = request.json["tel"]
-    # cliente.id_restaurante = request.json["id_restaurante"]  
     db.session.commit() 
     print(cliente) 
     return jsonify({"MSG":"Usuario actualizado exitosamente", "CODIGO":200, "complete":True})
