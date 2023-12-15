@@ -18,14 +18,19 @@ app.delete("/api/login/perfil/<email>")(delete_user)
 
 app.put("/api/login/perfil")(update_clave)
 
+app.put("/api/login/perfil/<id_empleado>")(update_cliente)
+
+
 # RUTAS PARA EL MENU
 app.get("/api/menu")(mostrar_menu)
 
 app.get("/api/menu/filter-c=<cat>")(categorias)
 
-app.get(f"/{app.config['PATH_IMG_MENU']}/<filename>")(obtener_img_plato_por_id)
+app.get(f"/{app.config['PATH_IMG_MENU']}/<filename>")(obtener_img_plato)
 
-# app.post("/api/menu")
+app.post("/api/menu/new_plato")(crear_plato)
+
+app.delete("/api/menu/<id_plato>")(delete_plato)
 
 
 # RUTAS PARA ADMIN

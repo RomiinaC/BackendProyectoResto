@@ -57,7 +57,7 @@ class Plato(db.Model):
     nombre = db.Column(db.String(100))
     categoria = db.Column(db.String(100))
     tipo = db.Column(db.String(10))
-    foto = db.Column(db.String(100))
+    foto = db.Column(db.String(1000))
     id_menu = db.Column(db.Integer)
     precio = db.Column(db.Integer)
     
